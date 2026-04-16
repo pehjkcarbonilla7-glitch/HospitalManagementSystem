@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login Page</title>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #f0f2f5;
+    }
+
+    .container {
+        width: 900px;
+        height: 500px;
+        display: flex;
+        background: #fff;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    .left {
+        width: 50%;
+        background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)),
+                    url('https://images.unsplash.com/photo-1584982751601-97dcc096659c');
+        background-size: cover;
+        background-position: center;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 30px;
+    }
+
+    .right {
+        width: 50%;
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .right h2 {
+        margin-bottom: 20px;
+    }
+
+    .input-group {
+        margin-bottom: 15px;
+    }
+
+    .input-group input {
+        width: 100%;
+        padding: 12px;
+        border-radius: 25px;
+        border: 1px solid #ccc;
+        outline: none;
+    }
+
+    .input-group input:focus {
+        border-color: #4a90e2;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 12px;
+        background: #4a90e2;
+        color: #fff;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+
+    .btn:hover {
+        background: #357ABD;
+    }
+
+    .extra {
+        text-align: center;
+        margin-top: 15px;
+        font-size: 13px;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    
+    <!-- LEFT -->
+    <div class="left">
+        <h2>MEDGRAPH</h2>
+        <p>Empowering Healthcare. One Click at a Time.</p>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="right">
+        <h2>Login</h2>
+
+        <div class="input-group">
+            <input type="text" id="username" placeholder="Enter username">
+        </div>
+
+        <div class="input-group">
+            <input type="password" id="password" placeholder="Enter password">
+        </div>
+
+        <button class="btn" onclick="login()">Log In</button>
+
+        <div class="extra">
+            <p>Don't have an account? <a href="#">Sign Up</a></p>
+        </div>
+    </div>
+
+</div>
+
+<script>
+const api = "http://localhost:5160/api";
+
+async function login() {
+
+    let username = document.getElementById("username").value;
+    let password = document.getElementById("password").value;
+
+    let res = await fetch(api + "/Auth/login", {
+        method: "POST",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify({
+            username: username,
+            password: password
+        })
+    });
+
+    if(res.ok){
+        alert("Login Success");
+
+        // redirect to dashboard
+        window.location.href = "dashboard.html";
+
+    } else {
+        alert("Invalid username or password");
+    }
+}
+</script>
+
+</body>
+</html>
