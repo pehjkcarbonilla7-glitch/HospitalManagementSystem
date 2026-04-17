@@ -128,7 +128,6 @@ td, th {
 </div>
 </div>
 
-<!-- PATIENT -->
 <div id="patients" class="section">
 <h2>Patient</h2>
 
@@ -138,6 +137,12 @@ td, th {
 
 <button onclick="addPatient()">Add</button>
 <button onclick="updatePatient()">Update</button>
+
+<!-- SEARCH -->
+<div class="search-box">
+    <input type="text" id="searchPatient" placeholder="Search patient..." onkeyup="searchPatients()">
+    <i class="fa fa-search"></i>
+</div>
 
 <table>
 <thead>
@@ -164,6 +169,12 @@ td, th {
 <button onclick="addDoctor()">Add</button>
 <button onclick="updateDoctor()">Update</button>
 
+<!-- SEARCH -->
+<div class="search-box">
+    <input type="text" id="searchDoctor" placeholder="Search doctor..." onkeyup="searchDoctors()">
+    <i class="fa fa-search"></i>
+</div>
+
 <table>
 <thead>
 <tr>
@@ -188,6 +199,12 @@ td, th {
 
 <button onclick="addAppointment()">Add</button>
 
+<!-- SEARCH -->
+<div class="search-box">
+    <input type="text" id="searchAppointment" placeholder="Search appointment..." onkeyup="searchAppointments()">
+    <i class="fa fa-search"></i>
+</div>
+
 <table>
 <thead>
 <tr>
@@ -205,12 +222,44 @@ td, th {
 </div>
 
 <script>
+
+
+
 const api = "http://localhost:5160/api";
 
 document.getElementById("date").innerText = new Date().toDateString();
 
 show('dashboard');
 
+function searchPatients(){
+    let input = document.getElementById("searchPatient").value.toLowerCase();
+    let rows = document.querySelectorAll("#patientTable tr");
+
+    rows.forEach(row => {
+        let text = row.innerText.toLowerCase();
+        row.style.display = text.includes(input) ? "" : "none";
+    });
+}
+
+function searchDoctors(){
+    let input = document.getElementById("searchDoctor").value.toLowerCase();
+    let rows = document.querySelectorAll("#doctorTable tr");
+
+    rows.forEach(row => {
+        let text = row.innerText.toLowerCase();
+        row.style.display = text.includes(input) ? "" : "none";
+    });
+}
+
+function searchAppointments(){
+    let input = document.getElementById("searchAppointment").value.toLowerCase();
+    let rows = document.querySelectorAll("#appointmentTable tr");
+
+    rows.forEach(row => {
+        let text = row.innerText.toLowerCase();
+        row.style.display = text.includes(input) ? "" : "none";
+    });
+}
 // SWITCH
 function show(section){
     document.querySelectorAll('.section').forEach(s => s.style.display="none");

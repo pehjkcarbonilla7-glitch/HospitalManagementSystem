@@ -55,3 +55,24 @@ body {
     width: 200px;
     text-align: center;
 }
+
+.search-box {
+    position: relative;
+    width: 300px;
+    margin-top: 15px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 10px 15px 10px 40px; /* space for icon LEFT */
+    border-radius: 25px;
+    border: 2px solid black;
+}
+
+.search-box i {
+    position: absolute;
+    left: 15px; /* icon inside LEFT */
+    top: 50%;
+    transform: translateY(-50%);
+    color: gray;
+}
